@@ -8,7 +8,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 描述：     用固定线程数的线程池执行10000个任务
+ * 描述：
+ * 用固定线程数的线程池执行10000个任务
  */
 
 /**
@@ -44,7 +45,9 @@ public class ThreadPoolRejectPolicyDemo {
 
             log.info(nanoTime + " task count: " + service.getTaskCount());
             log.info(nanoTime + " completed task count: " + service.getCompletedTaskCount());
+            log.info(nanoTime + " active count: " + service.getActiveCount());
 
+            log.info(nanoTime + " queue size: " + service.getQueue().size());
 //            log.info(nanoTime + " queue: " + service.getQueue());
 
             service.execute(new Task());
@@ -61,11 +64,11 @@ public class ThreadPoolRejectPolicyDemo {
 
             long nanoTime = System.nanoTime();
             log.info(nanoTime + " Start 子线程: " + Thread.currentThread().getName());
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             log.info(nanoTime + " End 子线程: " + Thread.currentThread().getName());
         }
 
