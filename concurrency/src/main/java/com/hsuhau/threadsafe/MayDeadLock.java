@@ -1,4 +1,6 @@
-package com.hsuhau;
+package com.hsuhau.threadsafe;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 首先，代码中创建了两个 Object 作为 synchronized 锁的对象，线程 1 先获取 o1 锁，sleep(500) 之后，获取 o2 锁；线程 2 与线程 1 执行顺序相反，先获取 o2 锁，sleep(500) 之后，获取 o1 锁。 假设两个线程几乎同时进入休息，休息完后，线程 1 想获取 o2 锁，线程 2 想获取 o1 锁，这时便发生了死锁，两个线程不主动调和，也不主动退出，就这样死死地等待对方先释放资源，导致程序得不到任何结果也不能停止运行。
@@ -13,6 +15,8 @@ package com.hsuhau;
  *
  * 好了，今天的内容就全部讲完了，通过本课时的学习我们知道了线程安全问题主要有 3 种，i++ 等情况导致的运行结果错误，通常是因为并发读写导致的，第二种是对象没有在正确的时间、地点被发布或初始化，而第三种线程安全问题就是活跃性问题，包括死锁、活锁和饥饿。
  */
+
+@Slf4j
 public class MayDeadLock {
 
     Object o1 = new Object();
@@ -27,7 +31,7 @@ public class MayDeadLock {
 
             synchronized (o2) {
 
-                System.out.println("线程1成功拿到两把锁");
+                log.info("线程1成功拿到两把锁");
 
             }
 
@@ -43,7 +47,7 @@ public class MayDeadLock {
 
             synchronized (o1) {
 
-                System.out.println("线程2成功拿到两把锁");
+                log.info("线程2成功拿到两把锁");
 
             }
 

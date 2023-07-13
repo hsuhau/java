@@ -1,4 +1,6 @@
-package com.hsuhau;
+package com.hsuhau.producerconsumer;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 
@@ -6,6 +8,7 @@ import java.util.LinkedList;
  * 描述：     wait形式实现生产者消费者模式
  */
 
+@Slf4j
 public class WaitStyle {
 
     public static void main(String[] args) {
@@ -56,6 +59,7 @@ class Producer implements Runnable {
 
 }
 
+@Slf4j
 class Consumer implements Runnable {
 
     private MyBlockingQueue storage;
@@ -88,6 +92,7 @@ class Consumer implements Runnable {
 
 }
 
+@Slf4j
 class MyBlockingQueue {
 
     private int maxSize;
@@ -105,13 +110,13 @@ class MyBlockingQueue {
     public synchronized void put() throws InterruptedException {
 
         while (storage.size() == maxSize) {
-            System.out.println("put wait");
+            log.info("put wait");
             wait();
 
         }
 
         storage.add(storage.size());
-        System.out.println("put storage = " + storage);
+        log.info("put storage = " + storage);
 
         notifyAll();
 
@@ -120,12 +125,12 @@ class MyBlockingQueue {
     public synchronized void take() throws InterruptedException {
 
         while (storage.size() == 0) {
-            System.out.println("take wait");
+            log.info("take wait");
             wait();
 
         }
         storage.remove();
-        System.out.println("take storage = " + storage);
+        log.info("take storage = " + storage);
 
         notifyAll();
 

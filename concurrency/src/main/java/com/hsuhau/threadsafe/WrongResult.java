@@ -1,9 +1,13 @@
-package com.hsuhau;
+package com.hsuhau.threadsafe;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 运行结果错误
  * 首先，来看多线程同时操作一个变量导致的运行结果错误。
  */
+
+@Slf4j
 public class WrongResult {
 
     volatile static int i;
@@ -19,8 +23,8 @@ public class WrongResult {
                 for (int j = 0; j < 10000; j++) {
 
                     i++;
-//                    System.out.println("i = " + i);
-//                    System.out.println("j = " + j);
+//                    log.info("i = " + i);
+//                    log.info("j = " + j);
                 }
 
             }
@@ -39,7 +43,7 @@ public class WrongResult {
 
         thread2.join();
 
-        System.out.println(i);
+        log.info(String.valueOf(i));
 
     }
 

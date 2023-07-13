@@ -1,8 +1,11 @@
 package com.hsuhau.producerconsumer;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+@Slf4j
 public class BlockingQueueTest01 {
     public static void main(String[] args) {
 
@@ -14,7 +17,7 @@ public class BlockingQueueTest01 {
 
                 try {
                     queue.put(queue.size());
-                    System.out.println("producer queue = " + queue);
+                    log.info("producer queue = " + queue);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -33,7 +36,7 @@ public class BlockingQueueTest01 {
 
                 try {
                     queue.take();
-                    System.out.println("consumer queue = " + queue);
+                    log.info("consumer queue = " + queue);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
