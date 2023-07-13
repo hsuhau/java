@@ -25,7 +25,7 @@ public class ThreadPoolRejectPolicyDemo {
 
     public static void main(String[] args) {
 
-        ExecutorService service = new ThreadPoolExecutor(
+        ThreadPoolExecutor service = new ThreadPoolExecutor(
                 5,
                 10,
                 5,
@@ -34,8 +34,19 @@ public class ThreadPoolRejectPolicyDemo {
                 new ThreadPoolExecutor.DiscardOldestPolicy());
 
         for (int i = 0; i < 1000; i++) {
+            long nanoTime = System.nanoTime();
 
-            log.info(String.valueOf(i));
+            log.info(nanoTime + " 主线程: " + String.valueOf(i));
+
+//            log.info(nanoTime + " core pool size: " + service.getCorePoolSize());
+//            log.info(nanoTime + " maximum pool size: " + service.getMaximumPoolSize());
+            log.info(nanoTime + " pool size: " + service.getPoolSize());
+
+            log.info(nanoTime + " task count: " + service.getTaskCount());
+            log.info(nanoTime + " completed task count: " + service.getCompletedTaskCount());
+
+//            log.info(nanoTime + " queue: " + service.getQueue());
+
             service.execute(new Task());
 
         }
@@ -48,8 +59,14 @@ public class ThreadPoolRejectPolicyDemo {
 
         public void run() {
 
-            log.info("Thread Name: " + Thread.currentThread().getName());
-            log.info("--------------------------------");
+            long nanoTime = System.nanoTime();
+            log.info(nanoTime + " Start 子线程: " + Thread.currentThread().getName());
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            log.info(nanoTime + " End 子线程: " + Thread.currentThread().getName());
         }
 
     }
