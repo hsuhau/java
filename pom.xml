@@ -10,6 +10,7 @@
     <description>java</description>
     <modules>
         <module>concurrency</module>
+        <module>jdbc</module>
     </modules>
 
     <properties>
@@ -54,6 +55,17 @@
             <artifactId>lombok</artifactId>
             <version>1.18.28</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.35</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.35</version>
         </dependency>
 
     </dependencies>
